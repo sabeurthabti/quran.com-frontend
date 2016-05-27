@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 
+import debug from 'helpers/debug';
+
 import html from './htmls';
 
 const style = require('./style.scss');
@@ -14,6 +16,7 @@ export default class SurahInfo extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isShowingSurahInfo && nextProps.surah && nextProps.surah.id) {
+      debug('component:SurahInfo', 'Set HTML');
       html[`html${nextProps.surah.id}`]((module) => this.setState({html: module}));
     }
   }

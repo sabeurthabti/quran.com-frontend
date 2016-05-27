@@ -6,7 +6,6 @@ class Html extends React.Component {
   render() {
     const { store, component, assets } = this.props;
     const head = Helmet.rewind();
-    console.log(assets.styles);
 
     return (
       <html>

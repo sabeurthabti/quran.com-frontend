@@ -1,6 +1,8 @@
 import { camelizeKeys } from 'humps';
 import { normalize } from 'normalizr';
 
+import debug from 'helpers/debug';
+
 export default function clientMiddleware(client) {
   return ({dispatch, getState}) => {
     return next => action => {
@@ -16,8 +18,10 @@ export default function clientMiddleware(client) {
       const [REQUEST, SUCCESS, FAILURE] = types;
 
       next({...rest, type: REQUEST});
+      debug('clientMiddleware', REQUEST);
       return promise(client).then(
         (result) => {
+          debug('clientMiddleware', SUCCESS);
           let camelizedJson = camelizeKeys(result);
 
           if (schema) {
@@ -30,6 +34,7 @@ export default function clientMiddleware(client) {
           return next({...rest, error, type: FAILURE});
         }
       ).catch((error) => {
+        debug('clientMiddleware', FAILURE);
         console.error('MIDDLEWARE ERROR:', error);
         next({...rest, error, type: FAILURE});
       });

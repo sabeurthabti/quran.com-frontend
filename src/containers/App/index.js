@@ -33,7 +33,7 @@ export default class App extends Component {
 
   render() {
     const { surahs, children } = this.props;
-    debug('component:APPLICATION', 'Render');
+    debug('component:App', 'Render');
 
     return (
       <div>
