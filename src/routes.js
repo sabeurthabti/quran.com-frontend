@@ -3,6 +3,7 @@ import IndexRoute from 'react-router/lib/IndexRoute';
 import Route from 'react-router/lib/Route';
 
 import App from './containers/App';
+import Surah from './containers/Surah';
 
 export default () => {
   return (
@@ -19,7 +20,7 @@ export default () => {
 
       <Route path="/search" getComponent={(nextState, cb) => System.import('./containers/Search').then(module => cb(null, module))} />
 
-      <Route path="/:surahId(/:range)" getComponent={(nextState, cb) => System.import('./containers/Surah').then(module => cb(null, module)).catch(err => console.trace(err))} />
+      <Route path="/:surahId(/:range)" component={Surah} />
     </Route>
   );
 }
