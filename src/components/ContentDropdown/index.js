@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import MenuItem from 'react-bootstrap/lib/MenuItem';
-
+import { alphabetically } from '../../utils/sort.js';
 const style = require('./style.scss');
 
 // To save API calls.
@@ -491,8 +491,11 @@ export default class ContentDropdown extends Component {
 
   renderLanguagesList() {
     return this.renderItems(
-      slugs.filter(slug => slug.language !== 'en' && slug.type === 'translation')
+      slugs
+      .filter(slug => slug.language !== 'en' && slug.type === 'translation')
+      .sort(alphabetically('name'))
     );
+
   }
 
   render() {
